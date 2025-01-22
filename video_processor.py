@@ -15,7 +15,7 @@ def load_video_paths(parent_dir):
     spinner.stop()  # Stop the spinner
     return video_paths
 
-def process_video(video_path, video_index, total_videos):
+def process_video(video_path, video_index, total_videos, output_file):
     cap = cv2.VideoCapture(video_path)
 
     if not cap.isOpened():
@@ -53,6 +53,8 @@ def process_video(video_path, video_index, total_videos):
             break
         elif key == 13:
             print(f"Video {video_index + 1} accepted")
+            output_file.write(f"{video_index} - {video_path}\n")
+            output_file.flush()
             break
 
         current_frame += 1

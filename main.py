@@ -29,26 +29,43 @@ def main():
                 video_paths = load_video_paths(parent_dir)
                 with open(videos_path_file, "w") as file:
                     file.write("\n".join(video_paths))
+                file.close()
                 print(f"Videos loaded from directory and saved to file {videos_path_file}")
             
     except FileNotFoundError:
         video_paths = load_video_paths(parent_dir)
         with open(videos_path_file, "w") as file:
             file.write("\n".join(video_paths))
+        file.close()
         print(f"Videos loaded from directory and saved to file {videos_path_file}")
 
+    last_clip_number = 0
 
-    # Check if the output file exists
     try:
         with open(output_file, "r") as file:
-            pass  # File exists, no action needed
+            lines = file.readlines()
+            last_line = lines[-1] if lines else None
+            if last_line:
+                
+                parts = last_line.split(" - ")
+                if len(parts) > 0:
+                    last_clip_number = int(parts[0].strip())
+                    print(f"Extracted last clip: {last_clip_number}")
+                else:
+                    print("No valid number found in the last line.")
+            else:
+                print("The file is empty or has no lines.")
     except FileNotFoundError:
-        with open(output_file, "w") as file:
-            pass  # Create an empty file
+        print("The file does not exist.")
+
+    file = open(output_file, "a")
 
 
-    for i, video_path in enumerate(video_paths):
-        process_video(video_path, i, len(video_paths))
+
+    for i in range(last_clip_number, len(video_paths)):
+        print(f"Processing video {i + 1}/{len(video_paths)}")
+        video_path = video_paths[i]
+        process_video(video_path, i, len(video_paths), file)
 
 if __name__ == "__main__":
     main()
