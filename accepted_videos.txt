@@ -3,9 +3,3 @@
 2 - /media/quimisagi/KIOXIA/SakugaDataset/download/kv/221257/221257-Scene-008.mp4
 3 - /media/quimisagi/KIOXIA/SakugaDataset/download/kv/159943/159943-Scene-002.mp4
 4 - /media/quimisagi/KIOXIA/SakugaDataset/download/kv/124745/124745-Scene-047.mp4
-5 - /media/quimisagi/KIOXIA/SakugaDataset/download/kv/179035/179035-Scene-015.mp4
-6 - /media/quimisagi/KIOXIA/SakugaDataset/download/kv/191184/191184-Scene-044.mp4
-6 - /media/quimisagi/KIOXIA/SakugaDataset/download/kv/140633/140633-Scene-002.mp4
-7 - /media/quimisagi/KIOXIA/SakugaDataset/download/kv/137720/137720-Scene-021.mp4
-7 - /media/quimisagi/KIOXIA/SakugaDataset/download/kv/124741/124741-Scene-004.mp4
-8 - /media/quimisagi/KIOXIA/SakugaDataset/download/kv/125027/125027-Scene-018.mp4
