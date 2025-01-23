@@ -15,7 +15,7 @@ def load_video_paths(parent_dir):
     spinner.stop()  # Stop the spinner
     return video_paths
 
-def process_video(video_path, video_index, total_videos, output_file):
+def process_video(video_path, video_index, total_videos, output_file, fps, minimum_frames):
     cap = cv2.VideoCapture(video_path)
 
     if not cap.isOpened():
@@ -23,14 +23,14 @@ def process_video(video_path, video_index, total_videos, output_file):
         return
 
     total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-    if total_frames < 3:
-        print(f"Error: Video {video_index + 1} has less than 3 frames. Skipping...")
+    if total_frames < minimum_frames:
+        print(f"Error: Video {video_index + 1} has less than {minimum_frames} frames. Skipping...")
         return
     current_frame = 0
 
     while True:
         ret, frame = cap.read()
-        time.sleep(0.01)
+        time.sleep(1 / fps)
 
         if not ret:
             cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
