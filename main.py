@@ -1,6 +1,7 @@
 from video_processor import load_video_paths, process_video
 import argparse
 import sys
+import random
 
 videos_path_file = "videos_path.txt"
 
@@ -11,6 +12,7 @@ def main():
     parser.add_argument("--restart", dest='restart', action='store_true', help="Restart the process from the beginning")
     parser.add_argument("--fps", type=int, default=100, help="Frames per second")
     parser.add_argument("--minimun_frames", type=int, default=3, help="Minimum frames trheshold. Videos with less frames will be skipped")
+    parser.add_argument("--random_selection", type=int, help="Select a specified number of clips randomly")
     args = parser.parse_args()
 
     parent_dir = args.parent_dir
@@ -19,7 +21,6 @@ def main():
     if not parent_dir:
         print("Error: No parent directory provided. Please pass --parent_dir argument.")
         sys.exit(1)  # Exit the program
-
 
     if args.restart:
         print("Restarting the process from the beginning.")
@@ -42,6 +43,9 @@ def main():
     except (FileNotFoundError, ValueError):
         # Load video paths from the directory if the file doesn't exist or is empty
         video_paths = load_video_paths(parent_dir)
+        if args.random_selection:
+            num_clips = args.random_selection
+            video_paths = random.sample(video_paths, num_clips)
         with open(videos_path_file, "w") as file:
             file.write("\n".join(video_paths))
         print(f"Videos loaded from directory and saved to file {videos_path_file}")
