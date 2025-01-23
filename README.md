@@ -27,7 +27,7 @@ The paths of the accepted videos will be stored in a `.txt` file (default: `acce
 - **`parent_dir` (required)**:  
   The path to the dataset directory containing your clips.
 
-- **`output_file`** *(default: `./accepted_videos.txt`)**:  
+- **`output_file`** *(default: `./accepted_videos.txt`)*:  
   This file stores the paths of the videos that have been accepted.
 
 - **`fps`** *(default: 100)*:  
@@ -36,7 +36,7 @@ The paths of the accepted videos will be stored in a `.txt` file (default: `acce
 - **`minimum_frames`** *(default: 3)*:  
   The minimum frame threshold. Videos with fewer frames than this will be skipped.
 
-  - **`restart`** *(optional)*:  
+- **`restart`** *(optional)*:  
   If set to `True`, the process will restart from scratch, reloading both the video paths and state.
 
 - **`random_selection`** *(optional)*:  
