@@ -3,6 +3,17 @@ import os
 import time
 from spinner import Spinner
 
+def delete_last_line(output_file, index):
+    with open(output_file.name, "r") as file:
+        lines = file.readlines()
+        
+        if lines and lines[-1].startswith(str(index)):
+            lines.pop()  # Remove the last line
+
+    with open(output_file.name, "w") as file:
+        file.writelines(lines)
+
+
 def load_video_paths(parent_dir):
     print(f"Loading video paths from {parent_dir}")
     video_paths = []
@@ -49,20 +60,24 @@ def process_video(video_path, video_index, total_videos, output_file, fps, minim
         cv2.imshow('Video Playback', frame)
 
         key = cv2.waitKey(25) & 0xFF
-        if key == ord('q'):
-            break
-        elif key == ord('r'):
+        if key == ord('r') or key == 27:  # 'r' key or Esc key
             print(f"Video {video_index + 1} rejected")
+            video_index += 1
             break
         elif key == 13:
             print(f"Video {video_index + 1} accepted")
             output_file.write(f"{video_index} - {video_path}\n")
             output_file.flush()
+            video_index += 1
+            break
+        elif key == ord('u'):
+            print("Reverting the last video...")
+            video_index -= 1
+            delete_last_line(output_file, video_index)
             break
 
-        current_frame += 1
-
     cap.release()
+    return video_index
 
 def draw_overlay(frame, info_lines, x=10, y=50, font_scale=0.6, font_color=(255, 255, 255), background_color=(0, 0, 0, 100), font_thickness=1, line_spacing=20):
     for idx, line in enumerate(info_lines):

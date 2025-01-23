@@ -9,7 +9,7 @@ def main():
     parser.add_argument("--parent_dir", type=str, required=True, help="Parent directory containing videos")
     parser.add_argument("--output_file", type=str, default='./accepted_videos.txt', help="Path of the output file to save the paths of accepted videos")
     parser.add_argument("--restart", dest='restart', action='store_true', help="Restart the process from the beginning")
-    parser.add_argument("--fps", type=int, default=64, help="Frames per second")
+    parser.add_argument("--fps", type=int, default=100, help="Frames per second")
     parser.add_argument("--minimun_frames", type=int, default=3, help="Minimum frames trheshold. Videos with less frames will be skipped")
     args = parser.parse_args()
 
@@ -71,10 +71,13 @@ def main():
 
 
 
-    for i in range(start_index, len(video_paths)):
+
+    i = start_index
+    while i < len(video_paths):
         print(f"Processing video {i + 1}/{len(video_paths)}")
         video_path = video_paths[i]
-        process_video(video_path, i, len(video_paths), file, args.fps, args.minimun_frames)
+        new_index = process_video(video_path, i, len(video_paths), file, args.fps, args.minimun_frames)
+        i = new_index if new_index is not None else i + 1
 
 if __name__ == "__main__":
     main()
