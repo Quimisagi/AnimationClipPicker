@@ -73,9 +73,6 @@ def main():
 
     file = open(output_file, "a")
 
-
-
-
     i = start_index
     while i < len(video_paths):
         print(f"Processing video {i + 1}/{len(video_paths)}")
