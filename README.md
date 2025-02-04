@@ -41,3 +41,7 @@ The paths of the accepted videos will be stored in a `.txt` file (default: `acce
 
 - **`random_selection`** *(optional)*:  
   Specify the number of clips to select randomly.
+
+
+## Copy videos
+  When a video is accepted, its path is added to a text file containing the list of all the accepted videos. You have to execute the `copy_clips.sh` file to copy the accepted videos to a desired location. 
